@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const openAiButton = document.getElementById('open-ai-btn');
-    const aiChatContainer = document.getElementById('ai-chat-container');
-    const closeAiButton = document.getElementById('close-ai-btn');
+    const openAiPanelButton = document.getElementById('open-ai-panel-btn');
+    const aiPanel = document.getElementById('ai-panel');
+    const closeAiPanelButton = document.getElementById('close-ai-panel-btn');
     const submitPromptButton = document.getElementById('submit-ai-prompt');
     const promptInput = document.getElementById('ai-prompt-input');
 
-    openAiButton.addEventListener('click', () => {
-        aiChatContainer.classList.remove('hidden');
+    openAiPanelButton.addEventListener('click', () => {
+        aiPanel.classList.remove('closed');
     });
 
-    closeAiButton.addEventListener('click', () => {
-        aiChatContainer.classList.add('hidden');
+    closeAiPanelButton.addEventListener('click', () => {
+        aiPanel.classList.add('closed');
     });
 
     submitPromptButton.addEventListener('click', () => {
@@ -25,6 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Prompt enviado para a IA:\n"${promptText}"');
 
         promptInput.value = '';
-        aiChatContainer.classList.add('hidden');
+        aiPanel.classList.add('closed');
     });
 });

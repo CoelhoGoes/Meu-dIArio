@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Diário com IA</title>
+        <title>Diário com IA - Botão Lateral</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -12,22 +12,23 @@
             <p>Escreva suas notas e use a IA para te ajudar a organizar e criar.</p>
 
             <textarea class="main-editor" placeholder="Comece a escrever aqui..."></textarea>
-
-            <button id="open-ai-btn" class="ai-button">
-                Falar com IA ✨
-            </button>
-
-            <div id="ai-chat-container" class="ai-chat-container hidden">
-                <div class="ai-chat-header">
-                    <h2>Assistente de Escrita</h2>
-                    <button id="close-ai-btn" class="close-button">&times;</button>
-                </div>
-                <div class="ai-chat-body">
-                    <textarea id="ai-prompt-input" placeholder="Peça ajuda à IA. Ex: 'Me ajude a organizar essa anotação em tópicos' ou 'Continue essa história...'"></textarea>
-                    <button id="submit-ai-prompt" class="submit-button">Enviar</button>
-                </div>
-            </div>
         </div>
+
+        <button id="open-ai-panel-btn" class="ai-side-button">
+            <span>Assistente IA ✨</span>
+        </button>
+
+        <div id="ai-panel" class="ai-panel closed">
+            <div class="ai-panel-header">
+                <h2>Assistente de Escrita</h2>
+                <button id="close-ai-panel-btn" class="close-button">&times;</button>
+            </div>
+            <div class="ai-panel-body">
+                <p>Peça o que precisar. Eu posso corrigir, resumir, continuar ou reescrever seus textos.</p>
+                <textarea id="ai-prompt-input" placeholder="Ex: 'Resuma o texto que escrevi em 3 tópicos.'"></textarea>
+                <button id="submit-ai-prompt" class="submit-button">Enviar</button>
+            </div>
+        </div>        
 
         <script src="script.js"></script>
     </body>
