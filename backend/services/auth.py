@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional
-from jose import jwt, JWTError  # 👈 importa também JWTError
+from jose import jwt, JWTError 
 import bcrypt
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -63,7 +63,6 @@ def authenticate_user(email: str, password: str):
         return None
     return user
 
-
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
@@ -75,6 +74,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 def verify_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return payload
-    except JWTError:  # 👈 agora com JWTError do python-jose
+        user_id = int(payload.get("sub"))
+        return {"user_id": user_id}
+    except (JWTError, Exception):
         return None

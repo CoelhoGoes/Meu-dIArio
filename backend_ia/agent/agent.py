@@ -1,4 +1,5 @@
 from google.adk.agents import LlmAgent
+from google.adk.tools import google_search 
 from dotenv import load_dotenv
 
 # Carregar variáveis de ambiente do arquivo .env
@@ -11,4 +12,5 @@ root_agent = LlmAgent(
     description="Agente raiz do sistema",
     instruction="""Você é um agente que auxilia um usuário a fazer anotações, voce deve ler oque o usuario passar interpretar ou 
     fazer oque ele pedir para auxiliar nas anotações dele.""",
+    tools=[google_search]
 )
