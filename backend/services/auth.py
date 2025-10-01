@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Optional
-import jwt
+from jose import jwt, JWTError  # 👈 importa também JWTError
 import bcrypt
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from connections.postgres import PostgresConnection 
+from connections.postgres import PostgresConnection
 from dotenv import load_dotenv
 import os
 
@@ -76,5 +76,5 @@ def verify_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
-    except jwt.PyJWTError:
+    except JWTError:  # 👈 agora com JWTError do python-jose
         return None
