@@ -137,3 +137,30 @@ h1 {
 .submit-button:hover {
     background-color: #2e7d32;
 }
+
+
+.upload-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.upload-btn:hover {
+    background-color: #0056b3;
+}
+
+#fileName {
+    margin-left: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+#previewArea{
+    margin-top:20px;
+    border:1px solid #ccc;
+    padding:10px;
+}
