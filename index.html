@@ -30,7 +30,14 @@
                 <button id="submit-ai-prompt" class="submit-button">Enviar</button>
             </div>
         </div>        
-
+        <div class="import-archive">
+            <input type="file" id="fileInput" style="display: none;">
+            <button onclick="document.getElementById('fileInput').click();" class="upload-btn">Escolher Arquivo</button>
+            <span id="fileName">Nenhum arquivo selecionado</span>
+        </div>
+        <div id="previewArea">
+            <p>Nenhum arquivo para visualizar.</p>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
