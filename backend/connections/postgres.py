@@ -26,5 +26,6 @@ class PostgresConnection:
             database=self.database,
             user=self.user,
             password=self.password,
-            port=self.port
+            port=self.port,
+            sslmode="require"  
         )
