@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Diário com IA - Login</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário com IA - Botão Lateral</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        <!-- ===== TELA DE LOGIN ===== -->
-        <div id="login-container" class="login-overlay">
-            <div class="login-box">
-                <h1>Login do Diário</h1>
-                <form id="login-form">
-                    <div class="input-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="login-email" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="password">Senha</label>
-                        <input type="password" id="login-password" required>
-                    </div>
-                    <button type="submit" id="login-button" class="login-button">Entrar</button>
-                    <p id="login-error" class="error-message"></p>
-                </form>
+    <!-- ======================= TELA DE LOGIN ======================= -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-container">
+            <h2>Login</h2>
+            <p>Acesse seu diário online.</p>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="seu@email.com">
             </div>
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" placeholder="Sua senha">
+            </div>
+            <button id="login-btn">Entrar</button>
+            <p id="login-error" class="error-message"></p>
         </div>
+    </div>
 
-        <!-- ===== CONTEÚDO PRINCIPAL DA APLICAÇÃO (escondido inicialmente) ===== -->
-        <div id="app-wrapper" class="hidden">
-            <div class="main-container">
-                <h1>Meu Diário Online</h1>
-                <p>Escreva suas notas e use a IA para te ajudar a organizar e criar.</p>
-                <textarea class="main-editor" placeholder="Comece a escrever aqui..."></textarea>
+    <!-- ======================= CONTEÚDO PRINCIPAL (Inicialmente escondido) ======================= -->
+    <div id="app-container" class="app-container hidden">
+        <header class="app-header">
+            <h1>Meu Diário Online</h1>
+            <div class="header-actions">
+                <button id="save-note-btn" class="save-note-btn">Salvar</button>
+                <button id="new-note-btn" class="new-note-btn">Nova Anotação</button>
+                <button id="open-ai-panel-btn" class="ai-side-button">
+                    <span>Assistente IA ✨</span>
+                </button>
             </div>
-
-            <button id="open-ai-panel-btn" class="ai-side-button">
-                <span>Assistente IA ✨</span>
-            </button>
-
-            <div id="ai-panel" class="ai-panel closed">
-                <div class="ai-panel-header">
-                    <h2>Assistente de Escrita</h2>
-                    <button id="close-ai-panel-btn" class="close-button">&times;</button>
+        </header>
+        
+        <div class="main-content">
+            <aside class="notes-sidebar">
+                <h2>Anotações</h2>
+                <!-- ÁREA PARA CRIAR PASTAS -->
+                <div class="directory-creator">
+                    <input type="text" id="new-directory-name" placeholder="Nome da nova pasta">
+                    <button id="create-directory-btn">+</button>
                 </div>
-                <div class="ai-panel-body">
-                    <p>Peça o que precisar. Eu posso corrigir, resumir, continuar ou reescrever seus textos.</p>
-                    <textarea id="ai-prompt-input" placeholder="Ex: 'Resuma o texto que escrevi em 3 tópicos.'"></textarea>
-                    <button id="submit-ai-prompt" class="submit-button">Enviar</button>
-                    
-                    <div class="ai-response-area">
-                        <h4>Resposta da IA:</h4>
-                        <div id="ai-response-content" class="response-content">
-                            Aguardando seu comando...
-                        </div>
-                    </div>
+                <!-- LISTA DE PASTAS E NOTAS -->
+                <div id="directory-list" class="directory-list">
+                    <!-- Conteúdo gerado pelo JavaScript -->
                 </div>
-            </div>
-            
-            <div class="import-archive">
-                <input type="file" id="fileInput" style="display: none;">
-                <button onclick="document.getElementById('fileInput').click();" class="upload-btn">Escolher Arquivo</button>
-                <span id="fileName">Nenhum arquivo selecionado</span>
-            </div>
-            <div id="previewArea">
-                <p>Nenhum arquivo para visualizar.</p>
-            </div>
+            </aside>
+            <main class="editor-container">
+                <textarea id="main-editor" class="main-editor" placeholder="Selecione ou crie uma anotação para começar..."></textarea>
+            </main>
         </div>
         
-        <script src="script.js"></script>
-    </body>
+        <div class="import-archive">
+            <input type="file" id="fileInput" style="display: none;">
+            <button onclick="document.getElementById('fileInput').click();" class="upload-btn">Escolher Arquivo</button>
+            <span id="fileName">Nenhum arquivo selecionado</span>
+        </div>
+        <div id="previewArea">
+            <p>Nenhum arquivo para visualizar.</p>
+        </div>
+    </div>
+
+    <!-- ======================= PAINEL LATERAL DA IA ======================= -->
+    <div id="ai-panel" class="ai-panel closed">
+        <div class="ai-panel-header">
+            <h2>Assistente de Escrita</h2>
+            <button id="close-ai-panel-btn" class="close-button">&times;</button>
+        </div>
+        <div class="ai-panel-body">
+            <p>Peça o que precisar. Eu posso corrigir, resumir, continuar ou reescrever seus textos.</p>
+            <textarea id="ai-prompt-input" placeholder="Ex: 'Resuma o texto que escrevi em 3 tópicos.'"></textarea>
+            <button id="submit-ai-prompt" class="submit-button">Enviar</button>
+            <div class="ai-response-area">
+                <h4>Resposta da IA:</h4>
+                <div id="ai-response-content" class="response-content">
+                    Aguardando seu comando...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
 
