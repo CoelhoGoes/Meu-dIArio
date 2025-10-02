@@ -2,8 +2,8 @@ from datetime import datetime, timedelta
 from typing import Optional
 from jose import jwt, JWTError 
 import bcrypt
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.rows import dict_row   
 from connections.postgres import PostgresConnection
 from dotenv import load_dotenv
 import os
@@ -20,7 +20,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", 6
 def get_user_by_email(email: str):
     conn = PostgresConnection().get_connection()
     try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        with conn.cursor(row_factory=dict_row) as cur:   # ✅ troca aqui
             cur.execute("SELECT * FROM users WHERE email = %s", (email,))
             return cur.fetchone()
     finally:
@@ -30,7 +30,7 @@ def get_user_by_email(email: str):
 def create_user(name: str, email: str, password: str):
     conn = PostgresConnection().get_connection()
     try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        with conn.cursor(row_factory=dict_row) as cur:   # ✅ troca aqui
             # 1. Verifica se já existe um usuário com o mesmo email
             cur.execute("SELECT id FROM users WHERE email = %s", (email,))
             existing_user = cur.fetchone()

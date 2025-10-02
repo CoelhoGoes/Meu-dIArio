@@ -1,5 +1,5 @@
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.rows import dict_row
 from connections.postgres import PostgresConnection
 
 
@@ -9,7 +9,7 @@ from connections.postgres import PostgresConnection
 def create_folder(user_id: int, name: str, parent_id: int = None):
     conn = PostgresConnection().get_connection()
     try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        with conn.cursor(row_factory=dict_row) as cur:   
             # Se for subpasta → validar se o pai pertence ao mesmo usuário
             if parent_id is not None:
                 cur.execute("""
@@ -35,7 +35,7 @@ def create_folder(user_id: int, name: str, parent_id: int = None):
 def list_folders(user_id: int):
     conn = PostgresConnection().get_connection()
     try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        with conn.cursor(row_factory=dict_row) as cur:
             cur.execute("""
                 SELECT id, name, parent_id, created_at, updated_at
                 FROM folders
@@ -68,7 +68,7 @@ def delete_folder(user_id: int, folder_id: int) -> bool:
 def create_note(user_id: int, folder_id: int, title: str, content: str):
     conn = PostgresConnection().get_connection()
     try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        with conn.cursor(row_factory=dict_row) as cur:
             # validar se a pasta pertence ao usuário
             cur.execute("""
                 SELECT id FROM folders
@@ -93,7 +93,7 @@ def create_note(user_id: int, folder_id: int, title: str, content: str):
 def list_notes(user_id: int, folder_id: int):
     conn = PostgresConnection().get_connection()
     try:
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        with conn.cursor(row_factory=dict_row) as cur:
             cur.execute("""
                 SELECT n.id, n.title, n.content, n.folder_id, n.created_at, n.updated_at
                 FROM notes n

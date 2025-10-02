@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  app1:
+    build: ./backend
+    container_name: backend_main
+    ports:
+      - "8001:8001"
+    restart: always
+
+  app2:
+    build: ./backend_ia
+    container_name: backend_ia
+    ports:
+      - "8000:8000"
+    restart: always

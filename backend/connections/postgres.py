@@ -1,9 +1,8 @@
-import psycopg2
+import psycopg
 from dotenv import load_dotenv
 import os
 load_dotenv()
 
-import psycopg2
 from dotenv import load_dotenv
 import os
 
@@ -21,7 +20,7 @@ class PostgresConnection:
 
     def get_connection(self):
         """Cria e retorna uma nova conexão"""
-        return psycopg2.connect(
+        return psycopg.connect(
             host=self.host,
             database=self.database,
             user=self.user,
